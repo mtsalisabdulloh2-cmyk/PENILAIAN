@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+
+  <style>
+    
+  </style>
+
+  
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Penilaian - PPB Hasyim Asy'ari</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .login-section, .main-content {
+            margin-bottom: 30px;
+        }
+        select, input, button {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .hidden {
+            display: none;
+        }
+        .logout-btn {
+            background-color: #e74c3c;
+            width: auto;
+            float: right;
+        }
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+        .header {
+            overflow: hidden;
+        }
+        .criteria-table {
+            margin: 15px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .nav-tabs {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .nav-tabs li {
+            margin-right: 5px;
+        }
+        .nav-tabs a {
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            color: #3498db;
+        }
+        .nav-tabs a.active {
+            border-color: #ddd #ddd #fff;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .tab-content {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sistem Penilaian Santri</h1>
+            <h2>Pondok Pesantren Bhasya Hasyim Asy'ari</h2>
+            <button id="logoutBtn" class="logout-btn hidden">Logout</button>
+        </div>
+
+        <!-- Form Login -->
+        <div id="loginSection" class="login-section">
+            <h3>Silakan Login</h3>
+            <div>
+                <label for="teacherSelect">Pilih Guru:</label>
+                <select id="teacherSelect">
+                    <option value="">-- Pilih Guru --</option>
+                    <option value="Kyai Zainul Arifin">Kyai Zainul Arifin</option>
+                    <option value="Kyai Harun Ar Rasyid">Kyai Harun Ar Rasyid</option>
+                    <option value="Kang Abdulloh Nur Hakim">Kang Abdulloh Nur Hakim</option>
+                    <option value="Kang Abdul Aziz">Kang Abdul Aziz</option>
+                    <option value="Kang Ibnu Mas'ud">Kang Ibnu Mas'ud</option>
+                </select>
+            </div>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Masukkan username">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Masukkan password">
+            </div>
+            <button id="loginBtn">Login</button>
+        </div>
+
+        <!-- Konten Utama (akan ditampilkan setelah login) -->
+        <div id="mainContent" class="main-content hidden">
+            <h2 id="welcomeMessage">Selamat Datang, </h2>
+            
+            <!-- Untuk ppbhasy1 -->
+            <div id="contentPPBHasy1" class="hidden">
+                <ul class="nav-tabs">
+                    <li><a href="#juz-tes" class="active">Juz Tes</a></li>
+                    <li><a href="#materi-tes">Materi Tes</a></li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div id="juz-tes" class="tab-pane active">
+                        <h3>Penilaian Juz Tes</h3>
+                        <table id="tableJuzTes">
+                            <thead>
+                                <tr>
+                                    <th>Nama Santri</th>
+                                    <th>Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                        <button id="submitJuzTes">Kirim Nilai</button>
+                    </div>
+                    
+                    <div id="materi-tes" class="tab-pane">
+                        <h3>Penilaian Materi Tes</h3>
+                        <table id="tableMateriTes">
+                            <thead>
+                                <tr>
+                                    <th>Nama Santri</th>
+                                    <th>Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                        <button id="submitMateriTes">Kirim Nilai</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Untuk ppbhasy2, ppbhasy3, ppbhasy4, ppbhasy5 -->
+            <div id="contentMultiple" class="hidden">
+                <ul class="nav-tabs" id="subjectTabs">
+                    <!-- Tab akan diisi oleh JavaScript -->
+                </ul>
+                
+                <div class="tab-content" id="subjectContent">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+                <button id="submitMultiple">Kirim Nilai</button>
+            </div>
+            
+            <!-- Untuk ppbhasy6 -->
+            <div id="contentPPBHasy6" class="hidden">
+                <h3>Penilaian Sikap dan Perilaku</h3>
+                <table id="tableSikap">
+                    <thead>
+                        <tr>
+                            <th>Nama Santri</th>
+                            <th>Ketertiban (A/B/C/D)</th>
+                            <th>Sikap (A/B/C/D)</th>
+                            <th>Perilaku (A/B/C/D)</th>
+                            <th>Pesan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+                <button id="submitSikap">Kirim Nilai</button>
+            </div>
+            
+            <!-- Untuk ppbhasyadmin -->
+            <div id="contentAdmin" class="hidden">
+                <h3>Panel Admin - Pengelolaan Nilai</h3>
+                <div>
+                    <button id="exportBtn">Export Data ke CSV</button>
+                    <button id="toggleSubmission">Aktifkan Pengiriman</button>
+                </div>
+                <table id="adminTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Nama Santri</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Nilai</th>
+                            <th>Kriteria</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data santri berdasarkan guru
+        const studentData = {
+            "Kyai Zainul Arifin": [
+                "M Ahsanul Fuad", "A Haseb Rifa'i", "M Ishom Mulfikri", "Akbar Abdillah", 
+                "Ryan Al Hasmy", "M Asrorul Muzakky", "A Dani Setiawan", "M Faizul Irsyad", 
+                "M. Fatih Mustofa", "M. Maulidin Rohmatul U", "Ahmad Zidan Mubarok"
+            ],
+            "Kyai Harun Ar Rasyid": [
+                "M Danil Akbar", "Adek Riyanto", "Ibnu Mas'ud", "M Hazari", 
+                "M. Ashabul Ihtizami", "Fani Fatchur R", "Nur Cahyo Adi Mashuri", 
+                "M. Hafidzul M.", "A. Baihaqi.", "Zaki Amiril M."
+            ],
+            "Kang Abdulloh Nur Hakim": [
+                "M Nur Abid Azhar", "M. Ridwan A.", "A. Rayyan Faiqi", "Azman Ahmad F.", 
+                "Ferdinan Mahrus", "Ahmad. Busro A.", "Galuh Setiawan", "M. Ulil Albab", 
+                "A Zainuddin", "Ahmad Farich Wafaazah", "Brillian Aqli", "M. Syauqi Jauhari", 
+                "M. Nawawi Romli", "Ahmad Rifqi Hakim"
+            ],
+            "Kang Abdul Aziz": [
+                "Wildan Dwi Figuna", "M. Nashoimus Soba Hafi", "M Aris Andi", 
+                "Maulana Syifa'ul Haq", "Ma'rufil Karukhi.", "Rizki Mubarok Z.", 
+                "M. Umar Faruq", "Ega Aliyuddin", "Syahrul Musthofa", "M. Faisal Abduloh", 
+                "Faiz Rojabi", "M. Hasbi Shiroj", "M. Ayyub F. A", "M. Yusuf Setiawan"
+            ],
+            "Kang Ibnu Mas'ud": [
+                "M. Ilham Habibulloh.", "Achmad Jihan Fahmi A.", "Ahmad Zakaria.", 
+                "M. Azhar Al Firos.", "M. Hafidz A.", "M. Naufal Azam", 
+                "M. Raditiya Kusuma W", "Bagas Putra Ardana", "Rahmat Fachriel Amin", 
+                "M. Kanzan Malakna F.", "A Maulana Yazid", "M. Nuruddin Dzaki", 
+                "M Deni Kiswanto", "Miftakhus Syarif H."
+            ]
+        };
+
+        // Informasi login
+        const users = {
+            "ppbhasy1": { password: "asy123", type: "ppbhasy1", teacher: "" },
+            "ppbhasy2": { password: "asy123", type: "ppbhasy2", teacher: "" },
+            "ppbhasy3": { password: "asy123", type: "ppbhasy3", teacher: "" },
+            "ppbhasy4": { password: "asy123", type: "ppbhasy4", teacher: "" },
+            "ppbhasy5": { password: "asy123", type: "ppbhasy5", teacher: "" },
+            "ppbhasy6": { password: "asy123", type: "ppbhasy6", teacher: "" },
+            "ppbhasyadmin": { password: "asyadmin", type: "admin", teacher: "" }
+        };
+
+        // Data nilai (disimulasikan penyimpanan di localStorage)
+        let scoreData = JSON.parse(localStorage.getItem('scoreData')) || {};
+        let submissionEnabled = localStorage.getItem('submissionEnabled') !== 'false';
+
+        // Elemen DOM
+        const loginSection = document.getElementById('loginSection');
+        const mainContent = document.getElementById('mainContent');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const teacherSelect = document.getElementById('teacherSelect');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+
+        // Konten berdasarkan tipe user
+        const contentPPBHasy1 = document.getElementById('contentPPBHasy1');
+        const contentMultiple = document.getElementById('contentMultiple');
+        const contentPPBHasy6 = document.getElementById('contentPPBHasy6');
+        const contentAdmin = document.getElementById('contentAdmin');
+
+        // Event Listeners
+        loginBtn.addEventListener('click', handleLogin);
+        logoutBtn.addEventListener('click', handleLogout);
+        
+        // Fungsi untuk menangani login
+        function handleLogin() {
+            const teacher = teacherSelect.value;
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (!teacher) {
+                alert('Pilih guru terlebih dahulu!');
+                return;
+            }
+            
+            if (!username || !password) {
+                alert('Username dan password harus diisi!');
+                return;
+            }
+            
+            if (users[username] && users[username].password === password) {
+                // Simpan informasi guru untuk user ini
+                users[username].teacher = teacher;
+                
+                // Login berhasil
+                loginSection.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                logoutBtn.classList.remove('hidden');
+                
+                // Tampilkan pesan selamat datang
+                welcomeMessage.textContent = `Selamat Datang, ${teacher}`;
+                
+                // Tampilkan konten sesuai tipe user
+                showContentForUser(users[username].type, teacher);
+            } else {
+                alert('Username atau password salah!');
+            }
+        }
+        
+        // Fungsi untuk menangani logout
+        function handleLogout() {
+            loginSection.classList.remove('hidden');
+            mainContent.classList.add('hidden');
+            logoutBtn.classList.add('hidden');
+            
+            // Reset form
+            teacherSelect.value = "";
+            usernameInput.value = "";
+            passwordInput.value = "";
+            
+            // Sembunyikan semua konten
+            contentPPBHasy1.classList.add('hidden');
+            contentMultiple.classList.add('hidden');
+            contentPPBHasy6.classList.add('hidden');
+            contentAdmin.classList.add('hidden');
+        }
+        
+        // Fungsi untuk menampilkan konten sesuai tipe user
+        function showContentForUser(userType, teacher) {
+            // Sembunyikan semua konten terlebih dahulu
+            contentPPBHasy1.classList.add('hidden');
+            contentMultiple.classList.add('hidden');
+            contentPPBHasy6.classList.add('hidden');
+            contentAdmin.classList.add('hidden');
+            
+            // Tampilkan konten yang sesuai
+            if (userType === 'ppbhasy1') {
+                contentPPBHasy1.classList.remove('hidden');
+                setupPPBHasy1Content(teacher);
+            } else if (['ppbhasy2', 'ppbhasy3', 'ppbhasy4', 'ppbhasy5'].includes(userType)) {
+                contentMultiple.classList.remove('hidden');
+                setupMultipleContent(userType, teacher);
+            } else if (userType === 'ppbhasy6') {
+                contentPPBHasy6.classList.remove('hidden');
+                setupPPBHasy6Content(teacher);
+            } else if (userType === 'admin') {
+                contentAdmin.classList.remove('hidden');
+                setupAdminContent();
+            }
+        }
+        
+        // Setup konten untuk ppbhasy1
+        function setupPPBHasy1Content(teacher) {
+            const students = studentData[teacher] || [];
+            const juzTesTable = document.querySelector('#tableJuzTes tbody');
+            const materiTesTable = document.querySelector('#tableMateriTes tbody');
+            
+            // Kosongkan tabel
+            juzTesTable.innerHTML = '';
+            materiTesTable.innerHTML = '';
+            
+            // Isi tabel dengan data santri
+            students.forEach(student => {
+                // Untuk Juz Tes
+                const juzRow = document.createElement('tr');
+                juzRow.innerHTML = `
+                    <td>${student}</td>
+                    <td><input type="number" min="0" max="100" data-student="${student}" data-subject="juz_tes"></td>
+                `;
+                juzTesTable.appendChild(juzRow);
+                
+                // Untuk Materi Tes
+                const materiRow = document.createElement('tr');
+                materiRow.innerHTML = `
+                    <td>${student}</td>
+                    <td><input type="number" min="0" max="100" data-student="${student}" data-subject="materi_tes"></td>
+                `;
+                materiTesTable.appendChild(materiRow);
+            });
+            
+            // Event listener untuk tombol kirim
+            document.getElementById('submitJuzTes').addEventListener('click', () => {
+                submitScores('ppbhasy1', 'juz_tes', teacher);
+            });
+            
+            document.getElementById('submitMateriTes').addEventListener('click', () => {
+                submitScores('ppbhasy1', 'materi_tes', teacher);
+            });
+            
+            // Setup tab navigation
+            setupTabs();
+        }
+        
+        // Setup konten untuk ppbhasy2, ppbhasy3, ppbhasy4, ppbhasy5
+        function setupMultipleContent(userType, teacher) {
+            const students = studentData[teacher] || [];
+            const subjectTabs = document.getElementById('subjectTabs');
+            const subjectContent = document.getElementById('subjectContent');
+            
+            // Tentukan mata pelajaran berdasarkan tipe user
+            let subjects = [];
+            if (userType === 'ppbhasy2') {
+                subjects = ['fashohah', 'kelancaran', 'tajwid'];
+            } else if (userType === 'ppbhasy3') {
+                subjects = ['1-5', '6-10', '1-10'];
+            } else if (userType === 'ppbhasy4') {
+                subjects = ['11-15', '16-20', '11-20'];
+            } else if (userType === 'ppbhasy5') {
+                subjects = ['21-25', '26-30', '21-30'];
+            }
+            
+            // Kosongkan tab dan konten
+            subjectTabs.innerHTML = '';
+            subjectContent.innerHTML = '';
+            
+            // Buat tab untuk setiap mata pelajaran
+            subjects.forEach((subject, index) => {
+                // Buat tab
+                const tabLi = document.createElement('li');
+                const tabLink = document.createElement('a');
+                tabLink.href = `#${subject}`;
+                tabLink.textContent = subject.replace(/-/g, ' - ');
+                if (index === 0) tabLink.classList.add('active');
+                tabLi.appendChild(tabLink);
+                subjectTabs.appendChild(tabLi);
+                
+                // Buat konten tab
+                const tabPane = document.createElement('div');
+                tabPane.id = subject;
+                tabPane.classList.add('tab-pane');
+                if (index === 0) tabPane.classList.add('active');
+                
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th>Nama Santri</th>
+                        <th>Nilai</th>
+                    </tr>
+                `;
+                const tbody = document.createElement('tbody');
+                
+                // Isi tabel dengan data santri
+                students.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${student}</td>
+                        <td><input type="number" min="0" max="100" data-student="${student}" data-subject="${subject}"></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                tabPane.appendChild(table);
+                subjectContent.appendChild(tabPane);
+            });
+            
+            // Event listener untuk tombol kirim
+            document.getElementById('submitMultiple').addEventListener('click', () => {
+                subjects.forEach(subject => {
+                    submitScores(userType, subject, teacher);
+                });
+                alert('Semua nilai telah dikirim!');
+            });
+            
+            // Setup tab navigation
+            setupTabs();
+        }
+        
+        // Setup konten untuk ppbhasy6
+        function setupPPBHasy6Content(teacher) {
+            const students = studentData[teacher] || [];
+            const sikapTable = document.querySelector('#tableSikap tbody');
+            
+            // Kosongkan tabel
+            sikapTable.innerHTML = '';
+            
+            // Isi tabel dengan data santri
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student}</td>
+                    <td>
+                        <select data-student="${student}" data-subject="ketertiban">
+                            <option value="">- Pilih -</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select data-student="${student}" data-subject="sikap">
+                            <option value="">- Pilih -</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select data-student="${student}" data-subject="perilaku">
+                            <option value="">- Pilih -</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" data-student="${student}" data-subject="pesan" placeholder="Pesan untuk santri">
+                    </td>
+                `;
+                sikapTable.appendChild(row);
+            });
+            
+            // Event listener untuk tombol kirim
+            document.getElementById('submitSikap').addEventListener('click', () => {
+                submitScores('ppbhasy6', 'sikap', teacher);
+                alert('Nilai sikap dan perilaku telah dikirim!');
+            });
+        }
+        
+        // Setup konten untuk admin
+        function setupAdminContent() {
+            // Event listener untuk tombol export
+            document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+            
+            // Event listener untuk tombol toggle pengiriman
+            const toggleBtn = document.getElementById('toggleSubmission');
+            toggleBtn.textContent = submissionEnabled ? 'Nonaktifkan Pengiriman' : 'Aktifkan Pengiriman';
+            toggleBtn.addEventListener('click', () => {
+                submissionEnabled = !submissionEnabled;
+                localStorage.setItem('submissionEnabled', submissionEnabled);
+                toggleBtn.textContent = submissionEnabled ? 'Nonaktifkan Pengiriman' : 'Aktifkan Pengiriman';
+                alert(`Pengiriman nilai sekarang ${submissionEnabled ? 'diaktifkan' : 'dinonaktifkan'}`);
+            });
+            
+            // Load data admin
+            loadAdminData();
+        }
+        
+        // Fungsi untuk mengirim nilai
+        function submitScores(userType, subject, teacher) {
+            if (!submissionEnabled) {
+                alert('Pengiriman nilai saat ini dinonaktifkan oleh admin.');
+                return;
+            }
+            
+            const students = studentData[teacher] || [];
+            const inputs = document.querySelectorAll(`input[data-subject="${subject}"], select[data-subject="${subject}"]`);
+            
+            inputs.forEach(input => {
+                const student = input.dataset.student;
+                const value = input.value.trim();
+                
+                if (value) {
+                    // Simpan nilai
+                    if (!scoreData[userType]) scoreData[userType] = {};
+                    if (!scoreData[userType][teacher]) scoreData[userType][teacher] = {};
+                    if (!scoreData[userType][teacher][student]) scoreData[userType][teacher][student] = {};
+                    
+                    scoreData[userType][teacher][student][subject] = value;
+                }
+            });
+            
+            // Simpan ke localStorage
+            localStorage.setItem('scoreData', JSON.stringify(scoreData));
+            alert('Nilai berhasil dikirim!');
+        }
+        
+        // Fungsi untuk setup tab navigation
+        function setupTabs() {
+            const tabLinks = document.querySelectorAll('.nav-tabs a');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Hapus class active dari semua tab dan konten
+                    document.querySelectorAll('.nav-tabs a').forEach(tab => tab.classList.remove('active'));
+                    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                    
+                    // Tambah class active ke tab yang diklik
+                    link.classList.add('active');
+                    
+                    // Tampilkan konten yang sesuai
+                    const target = link.getAttribute('href');
+                    document.querySelector(target).classList.add('active');
+                });
+            });
+        }
+        
+        // Fungsi untuk memuat data admin
+        function loadAdminData() {
+            const adminTable = document.querySelector('#adminTable tbody');
+            adminTable.innerHTML = '';
+            
+            // Iterasi melalui semua data nilai
+            for (const userType in scoreData) {
+                for (const teacher in scoreData[userType]) {
+                    for (const student in scoreData[userType][teacher]) {
+                        for (const subject in scoreData[userType][teacher][student]) {
+                            const value = scoreData[userType][teacher][student][subject];
+                            const criteria = getCriteria(value, subject);
+                            
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${userType}</td>
+                                <td>${student}</td>
+                                <td>${subject}</td>
+                                <td>${value}</td>
+                                <td>${criteria}</td>
+                                <td>
+                                    <button class="edit-btn" data-usertype="${userType}" data-teacher="${teacher}" data-student="${student}" data-subject="${subject}">Edit</button>
+                                    <button class="delete-btn" data-usertype="${userType}" data-teacher="${teacher}" data-student="${student}" data-subject="${subject}">Hapus</button>
+                                </td>
+                            `;
+                            adminTable.appendChild(row);
+                        }
+                    }
+                }
+            }
+            
+            // Tambahkan event listener untuk tombol edit dan hapus
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const { usertype, teacher, student, subject } = btn.dataset;
+                    const newValue = prompt(`Edit nilai untuk ${student} pada ${subject}:`, scoreData[usertype][teacher][student][subject]);
+                    
+                    if (newValue !== null) {
+                        scoreData[usertype][teacher][student][subject] = newValue;
+                        localStorage.setItem('scoreData', JSON.stringify(scoreData));
+                        loadAdminData(); // Reload data
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const { usertype, teacher, student, subject } = btn.dataset;
+                    
+                    if (confirm(`Hapus nilai untuk ${student} pada ${subject}?`)) {
+                        delete scoreData[usertype][teacher][student][subject];
+                        
+                        // Hapus objek kosong
+                        if (Object.keys(scoreData[usertype][teacher][student]).length === 0) {
+                            delete scoreData[usertype][teacher][student];
+                        }
+                        if (Object.keys(scoreData[usertype][teacher]).length === 0) {
+                            delete scoreData[usertype][teacher];
+                        }
+                        if (Object.keys(scoreData[usertype]).length === 0) {
+                            delete scoreData[usertype];
+                        }
+                        
+                        localStorage.setItem('scoreData', JSON.stringify(scoreData));
+                        loadAdminData(); // Reload data
+                    }
+                });
+            });
+        }
+        
+        // Fungsi untuk mendapatkan kriteria berdasarkan nilai
+        function getCriteria(value, subject) {
+            // Untuk nilai berupa huruf (A/B/C/D)
+            if (['A', 'B', 'C', 'D'].includes(value.toUpperCase())) {
+                return value.toUpperCase();
+            }
+            
+            // Untuk nilai numerik
+            const numValue = parseInt(value);
+            if (isNaN(numValue)) return '-';
+            
+            if (numValue < 60) return 'غير مقبول (Tidak lulus)';
+            if (numValue <= 70) return 'مقبول (Lulus)';
+            if (numValue <= 80) return 'جيد (Bagus)';
+            if (numValue <= 90) return 'جيد جدا (Sangat baik)';
+            return 'ممتاز (Sempurna)';
+        }
+        
+        // Fungsi untuk export data ke CSV
+        function exportToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "User Type,Guru,Nama Santri,Mata Pelajaran,Nilai,Kriteria\n";
+            
+            for (const userType in scoreData) {
+                for (const teacher in scoreData[userType]) {
+                    for (const student in scoreData[userType][teacher]) {
+                        for (const subject in scoreData[userType][teacher][student]) {
+                            const value = scoreData[userType][teacher][student][subject];
+                            const criteria = getCriteria(value, subject);
+                            
+                            csvContent += `${userType},${teacher},${student},${subject},${value},${criteria}\n`;
+                        }
+                    }
+                }
+            }
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "nilai_santri.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
+
+  <script>
+    
+  </script>
+</body>
+</html>
