@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+
+  <style>
+    body {
+            font-family: Arial, sans-serif;
+            background: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #218838;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+  </style>
+
+  
+</head>
+<body>
+  <div class="login-container">
+        <h2>Login</h2>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error"><?php echo htmlspecialchars($_GET['error']); ?></div>
+        <?php endif; ?>
+        <form action="login.php" method="post">
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+  <script>
+    <?php
+session_start();
+
+// Dummy akun untuk contoh
+$valid_username = 'admin';
+$valid_password = '123456'; // Jangan gunakan password seperti ini untuk produksi!
+
+// Ambil data dari form
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
+
+// Validasi
+if ($username === $valid_username && $password === $valid_password) {
+    $_SESSION['username'] = $username;
+    header("Location: dashboard.php");
+    exit;
+} else {
+    $error = "Username atau password salah!";
+    header("Location: login.html?error=" . urlencode($error));
+    exit;
+}
+?>
+
+  </script>
+</body>
+</html>
