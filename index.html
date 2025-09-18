@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+
+  <style>
+    
+  </style>
+
+  
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Penilaian - PPB Asy-Syifa'iyyah</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .app-title {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .app-subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        .login-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button.logout {
+            background-color: var(--accent-color);
+        }
+        
+        button.logout:hover {
+            background-color: #c0392b;
+        }
+        
+        .dashboard {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-info {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .group-selection {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .group-selection select {
+            margin-right: 10px;
+            flex: 1;
+        }
+        
+        .student-list {
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-buttons button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .evaluation-form {
+            margin-top: 20px;
+        }
+        
+        .score-input {
+            width: 80px;
+            text-align: center;
+        }
+        
+        .notification {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="app-title">Pondok Pesantren Bidayatul Hidayah</h1>
+            <p class="app-subtitle">Asrama Asy-Syifa'iyyah - Sistem Penilaian Santri</p>
+        </header>
+        
+        <section class="login-section" id="loginSection">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password">
+            </div>
+            
+            <div class="form-group" id="groupSelectionLogin">
+                <label for="loginGroup">Pilih Kelompok</label>
+                <select id="loginGroup">
+                    <option value="">-- Pilih Kelompok --</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            
+            <button id="loginBtn">Masuk</button>
+            
+            <div id="loginNotification" class="notification hidden"></div>
+        </section>
+        
+        <section class="dashboard" id="adminDashboard">
+            <div class="dashboard-header">
+                <h2>Dashboard Admin</h2>
+                <div>
+                    <span class="user-info" id="adminUserInfo"></span>
+                    <button class="logout" id="adminLogout">Keluar</button>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>Cara Menyimpan Data</h3>
+                <p>Data disimpan secara otomatis di browser Anda menggunakan localStorage. Untuk menyimpan data secara permanen:</p>
+                <ol>
+                    <li>Klik tombol "Ekspor Data" di bawah untuk mengunduh file backup</li>
+                    <li>Simpan file di lokasi yang aman</li>
+                    <li>Untuk memulihkan data, gunakan tombol "Impor Data"</li>
+                </ol>
+                <div class="action-buttons">
+                    <button id="exportDataBtn">Ekspor Data</button>
+                    <button id="importDataBtn">Impor Data</button>
+                    <input type="file" id="importDataFile" accept=".json" style="display: none;">
+                </div>
+            </div>
+            
+            <div class="group-management">
+                <h3>Manajemen Kelompok</h3>
+                <div class="group-selection">
+                    <input type="text" id="newGroupName" placeholder="Nama kelompok baru">
+                    <button id="addGroupBtn">Tambah Kelompok</button>
+                </div>
+                
+                <div class="group-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Kelompok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="groupListBody">
+                            <!-- Groups will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="student-management">
+                <h3>Manajemen Santri</h3>
+                <div class="group-selection">
+                    <select id="studentGroupSelect">
+                        <option value="">-- Pilih Kelompok --</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                    <input type="text" id="newStudentName" placeholder="Nama santri baru">
+                    <button id="addStudentBtn">Tambah Santri</button>
+                </div>
+                
+                <div class="student-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Santri</th>
+                                <th>Kelompok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentListBody">
+                            <!-- Students will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="evaluation-results">
+                <h3>Hasil Penilaian</h3>
+                <div class="group-selection">
+                    <select id="resultGroupSelect">
+                        <option value="">-- Semua Kelompok --</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                    <button id="downloadResultsBtn">Unduh Hasil (CSV)</button>
+                </div>
+                
+                <div class="results-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Santri</th>
+                                <th>Kelompok</th>
+                                <th>Kelancaran</th>
+                                <th>Tajwid</th>
+                                <th>Fashohah</th>
+                                <th>Tasmi' 1-5</th>
+                                <th>Tasmi' 6-10</th>
+                                <th>Tasmi' 1-10</th>
+                                <th>Tasmi' 11-15</th>
+                                <th>Tasmi' 16-20</th>
+                                <th>Tasmi' 11-20</th>
+                                <th>Tasmi' 21-25</th>
+                                <th>Tasmi' 26-30</th>
+                                <th>Tasmi' 21-30</th>
+                                <th>Perilaku</th>
+                                <th>Akhlaq</th>
+                                <th>Ketertiban</th>
+                                <th>Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody">
+                            <!-- Results will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <section class="dashboard" id="teacherDashboard">
+            <div class="dashboard-header">
+                <h2>Dashboard Pengajar</h2>
+                <div>
+                    <span class="user-info" id="teacherUserInfo"></span>
+                    <button class="logout" id="teacherLogout">Keluar</button>
+                </div>
+            </div>
+            
+            <div class="group-selection">
+                <select id="teacherGroupSelect">
+                    <option value="">-- Pilih Kelompok --</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            
+            <div class="evaluation-section">
+                <h3>Penilaian Santri</h3>
+                <div class="student-list">
+                    <table>
+                        <thead>
+                            <tr id="teacherTableHeader">
+                                <!-- Table headers will be populated dynamically based on user type -->
+                            </tr>
+                        </thead>
+                        <tbody id="teacherStudentListBody">
+                            <!-- Students will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal for evaluation -->
+        <div class="modal" id="evaluationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Penilaian Santri</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="evaluation-form" id="evaluationForm">
+                    <!-- Evaluation form will be populated dynamically based on user type -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage keys
+        const DATA_KEYS = {
+            USERS: 'ppbh_users',
+            GROUPS: 'ppbh_groups',
+            STUDENTS: 'ppbh_students',
+            EVALUATIONS: 'ppbh_evaluations'
+        };
+        
+        // Default data
+        const defaultUsers = [
+            { username: "ppbhasyadmin", password: "asyadmin", role: "admin", group: null },
+            { username: "ppbhasy1", password: "asy123", role: "teacher", group: null },
+            { username: "ppbhasy2", password: "asy123", role: "teacher", group: null },
+            { username: "ppbhasy3", password: "asy123", role: "teacher", group: null },
+            { username: "ppbhasy4", password: "asy123", role: "teacher", group: null },
+            { username: "ppbhasy5", password: "asy123", role: "teacher", group: null }
+        ];
+        
+        const defaultGroups = [
+            { id: 1, name: "Mustahiq 1" },
+            { id: 2, name: "Mustahiq 2" },
+            { id: 3, name: "Kyai 1" }
+        ];
+        
+        const defaultStudents = [
+            { id: 1, name: "Ahmad", groupId: 1 },
+            { id: 2, name: "Budi", groupId: 1 },
+            { id: 3, name: "Chandra", groupId: 2 },
+            { id: 4, name: "Dedi", groupId: 2 },
+            { id: 5, name: "Eko", groupId: 3 }
+        ];
+        
+        // Load data from localStorage or use default data
+        let users = loadData(DATA_KEYS.USERS, defaultUsers);
+        let groups = loadData(DATA_KEYS.GROUPS, defaultGroups);
+        let students = loadData(DATA_KEYS.STUDENTS, defaultStudents);
+        let evaluations = loadData(DATA_KEYS.EVALUATIONS, []);
+        
+        // DOM elements
+        const loginSection = document.getElementById('loginSection');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const teacherDashboard = document.getElementById('teacherDashboard');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginGroupSelect = document.getElementById('loginGroup');
+        const groupSelectionLogin = document.getElementById('groupSelectionLogin');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginNotification = document.getElementById('loginNotification');
+        
+        // Current user
+        let currentUser = null;
+        
+        // Initialize the application
+        function init() {
+            // Check if user is already logged in (from localStorage)
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showDashboard();
+            } else {
+                showLogin();
+            }
+            
+            // Populate group select for login
+            populateGroupSelect(loginGroupSelect);
+            
+            // Event listeners
+            loginBtn.addEventListener('click', handleLogin);
+            
+            // Check if admin user needs group selection
+            usernameInput.addEventListener('input', toggleGroupSelection);
+            
+            // Add event listeners for data management
+            document.getElementById('exportDataBtn').addEventListener('click', exportData);
+            document.getElementById('importDataBtn').addEventListener('click', triggerImport);
+            document.getElementById('importDataFile').addEventListener('change', importData);
+        }
+        
+        // Load data from localStorage
+        function loadData(key, defaultValue) {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : defaultValue;
+        }
+        
+        // Save data to localStorage
+        function saveData(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+        
+        // Export all data as a JSON file
+        function exportData() {
+            const dataToExport = {
+                users: users,
+                groups: groups,
+                students: students,
+                evaluations: evaluations,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `ppbh_data_${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+        
+        // Trigger file input for import
+        function triggerImport() {
+            document.getElementById('importDataFile').click();
+        }
+        
+        // Import data from JSON file
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    if (importedData.users) users = importedData.users;
+                    if (importedData.groups) groups = importedData.groups;
+                    if (importedData.students) students = importedData.students;
+                    if (importedData.evaluations) evaluations = importedData.evaluations;
+                    
+                    // Save imported data to localStorage
+                    saveData(DATA_KEYS.USERS, users);
+                    saveData(DATA_KEYS.GROUPS, groups);
+                    saveData(DATA_KEYS.STUDENTS, students);
+                    saveData(DATA_KEYS.EVALUATIONS, evaluations);
+                    
+                    // Refresh UI
+                    if (currentUser && currentUser.role === 'admin') {
+                        showAdminDashboard();
+                    }
+                    
+                    alert('Data berhasil diimpor!');
+                } catch (error) {
+                    alert('Error mengimpor data: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Reset file input
+            event.target.value = '';
+        }
+        
+        // Toggle group selection based on username
+        function toggleGroupSelection() {
+            const username = usernameInput.value;
+            if (username === 'ppbhasyadmin') {
+                groupSelectionLogin.classList.add('hidden');
+            } else {
+                groupSelectionLogin.classList.remove('hidden');
+            }
+        }
+        
+        // Handle login
+        function handleLogin() {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            const groupId = loginGroupSelect.value;
+            
+            // Validate credentials
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (!user) {
+                showNotification(loginNotification, 'Username atau password salah', 'error');
+                return;
+            }
+            
+            // For non-admin users, group selection is required
+            if (user.role !== 'admin' && !groupId) {
+                showNotification(loginNotification, 'Harap pilih kelompok', 'error');
+                return;
+            }
+            
+            // Set current user
+            currentUser = {
+                username: user.username,
+                role: user.role,
+                groupId: user.role === 'admin' ? null : parseInt(groupId)
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            // Show appropriate dashboard
+            showDashboard();
+        }
+        
+        // Show login section
+        function showLogin() {
+            loginSection.style.display = 'block';
+            adminDashboard.style.display = 'none';
+            teacherDashboard.style.display = 'none';
+            
+            // Clear inputs
+            usernameInput.value = '';
+            passwordInput.value = '';
+            loginGroupSelect.value = '';
+        }
+        
+        // Show appropriate dashboard based on user role
+        function showDashboard() {
+            loginSection.style.display = 'none';
+            
+            if (currentUser.role === 'admin') {
+                showAdminDashboard();
+            } else {
+                showTeacherDashboard();
+            }
+        }
+        
+        // Show admin dashboard
+        function showAdminDashboard() {
+            adminDashboard.style.display = 'block';
+            teacherDashboard.style.display = 'none';
+            
+            // Set user info
+            document.getElementById('adminUserInfo').textContent = `Selamat datang, ${currentUser.username}`;
+            
+            // Populate groups
+            populateGroupList();
+            
+            // Populate group selects
+            const groupSelects = [
+                document.getElementById('studentGroupSelect'),
+                document.getElementById('resultGroupSelect')
+            ];
+            
+            groupSelects.forEach(select => {
+                populateGroupSelect(select);
+            });
+            
+            // Populate students
+            populateStudentList();
+            
+            // Populate results
+            populateResults();
+            
+            // Add event listeners for admin dashboard
+            document.getElementById('adminLogout').addEventListener('click', handleLogout);
+            document.getElementById('addGroupBtn').addEventListener('click', addGroup);
+            document.getElementById('addStudentBtn').addEventListener('click', addStudent);
+            document.getElementById('downloadResultsBtn').addEventListener('click', downloadResults);
+            document.getElementById('resultGroupSelect').addEventListener('change', populateResults);
+        }
+        
+        // Show teacher dashboard
+        function showTeacherDashboard() {
+            adminDashboard.style.display = 'none';
+            teacherDashboard.style.display = 'block';
+            
+            // Set user info
+            document.getElementById('teacherUserInfo').textContent = `Selamat datang, ${currentUser.username} - ${getGroupName(currentUser.groupId)}`;
+            
+            // Populate group select
+            const teacherGroupSelect = document.getElementById('teacherGroupSelect');
+            populateGroupSelect(teacherGroupSelect);
+            teacherGroupSelect.value = currentUser.groupId;
+            
+            // Set up evaluation table based on user type
+            setupEvaluationTable();
+            
+            // Populate students for evaluation
+            populateEvaluationStudents();
+            
+            // Add event listeners for teacher dashboard
+            document.getElementById('teacherLogout').addEventListener('click', handleLogout);
+            teacherGroupSelect.addEventListener('change', function() {
+                currentUser.groupId = parseInt(this.value);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                populateEvaluationStudents();
+            });
+        }
+        
+        // Set up evaluation table based on user type
+        function setupEvaluationTable() {
+            const tableHeader = document.getElementById('teacherTableHeader');
+            tableHeader.innerHTML = '<th>Nama Santri</th><th>Aksi</th>';
+            
+            // Add specific columns based on user type
+            if (currentUser.username === 'ppbhasy1') {
+                tableHeader.innerHTML = '<th>Nama Santri</th><th>Kelancaran</th><th>Tajwid</th><th>Fashohah</th><th>Aksi</th>';
+            } else if (currentUser.username === 'ppbhasy2') {
+                tableHeader.innerHTML = '<th>Nama Santri</th><th>Tasmi\' 1-5</th><th>Tasmi\' 6-10</th><th>Tasmi\' 1-10</th><th>Aksi</th>';
+            } else if (currentUser.username === 'ppbhasy3') {
+                tableHeader.innerHTML = '<th>Nama Santri</th><th>Tasmi\' 11-15</th><th>Tasmi\' 16-20</th><th>Tasmi\' 11-20</th><th>Aksi</th>';
+            } else if (currentUser.username === 'ppbhasy4') {
+                tableHeader.innerHTML = '<th>Nama Santri</th><th>Tasmi\' 21-25</th><th>Tasmi\' 26-30</th><th>Tasmi\' 21-30</th><th>Aksi</th>';
+            } else if (currentUser.username === 'ppbhasy5') {
+                tableHeader.innerHTML = '<th>Nama Santri</th><th>Perilaku</th><th>Akhlaq</th><th>Ketertiban</th><th>Catatan</th><th>Aksi</th>';
+            }
+        }
+        
+        // Populate students for evaluation
+        function populateEvaluationStudents() {
+            const tbody = document.getElementById('teacherStudentListBody');
+            tbody.innerHTML = '';
+            
+            const groupStudents = students.filter(student => student.groupId === currentUser.groupId);
+            
+            groupStudents.forEach(student => {
+                const row = document.createElement('tr');
+                
+                // Student name
+                row.innerHTML = `<td>${student.name}</td>`;
+                
+                // Evaluation fields based on user type
+                if (currentUser.username === 'ppbhasy1') {
+                    const evaluation = getStudentEvaluation(student.id) || {};
+                    row.innerHTML += `
+                        <td>${evaluation.kelancaran || ''}</td>
+                        <td>${evaluation.tajwid || ''}</td>
+                        <td>${evaluation.fashohah || ''}</td>
+                    `;
+                } else if (currentUser.username === 'ppbhasy2') {
+                    const evaluation = getStudentEvaluation(student.id) || {};
+                    row.innerHTML += `
+                        <td>${evaluation.tasmi1_5 || ''}</td>
+                        <td>${evaluation.tasmi6_10 || ''}</td>
+                        <td>${evaluation.tasmi1_10 || ''}</td>
+                    `;
+                } else if (currentUser.username === 'ppbhasy3') {
+                    const evaluation = getStudentEvaluation(student.id) || {};
+                    row.innerHTML += `
+                        <td>${evaluation.tasmi11_15 || ''}</td>
+                        <td>${evaluation.tasmi16_20 || ''}</td>
+                        <td>${evaluation.tasmi11_20 || ''}</td>
+                    `;
+                } else if (currentUser.username === 'ppbhasy4') {
+                    const evaluation = getStudentEvaluation(student.id) || {};
+                    row.innerHTML += `
+                        <td>${evaluation.tasmi21_25 || ''}</td>
+                        <td>${evaluation.tasmi26_30 || ''}</td>
+                        <td>${evaluation.tasmi21_30 || ''}</td>
+                    `;
+                } else if (currentUser.username === 'ppbhasy5') {
+                    const evaluation = getStudentEvaluation(student.id) || {};
+                    row.innerHTML += `
+                        <td>${evaluation.perilaku || ''}</td>
+                        <td>${evaluation.akhlaq || ''}</td>
+                        <td>${evaluation.ketertiban || ''}</td>
+                        <td>${evaluation.catatan || ''}</td>
+                    `;
+                }
+                
+                // Action button
+                const actionCell = document.createElement('td');
+                const evaluateBtn = document.createElement('button');
+                evaluateBtn.textContent = 'Nilai';
+                evaluateBtn.addEventListener('click', () => openEvaluationModal(student));
+                actionCell.appendChild(evaluateBtn);
+                row.appendChild(actionCell);
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Open evaluation modal
+        function openEvaluationModal(student) {
+            const modal = document.getElementById('evaluationModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const evaluationForm = document.getElementById('evaluationForm');
+            
+            modalTitle.textContent = `Penilaian ${student.name}`;
+            
+            // Create form based on user type
+            evaluationForm.innerHTML = '';
+            
+            if (currentUser.username === 'ppbhasy1') {
+                const evaluation = getStudentEvaluation(student.id) || {};
+                
+                evaluationForm.innerHTML = `
+                    <div class="form-group">
+                        <label for="kelancaran">Kelancaran</label>
+                        <input type="number" id="kelancaran" class="score-input" min="0" max="100" value="${evaluation.kelancaran || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tajwid">Tajwid</label>
+                        <input type="number" id="tajwid" class="score-input" min="0" max="100" value="${evaluation.tajwid || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="fashohah">Fashohah</label>
+                        <input type="number" id="fashohah" class="score-input" min="0" max="100" value="${evaluation.fashohah || ''}">
+                    </div>
+                `;
+            } else if (currentUser.username === 'ppbhasy2') {
+                const evaluation = getStudentEvaluation(student.id) || {};
+                
+                evaluationForm.innerHTML = `
+                    <div class="form-group">
+                        <label for="tasmi1_5">Tasmi' 1-5</label>
+                        <input type="number" id="tasmi1_5" class="score-input" min="0" max="100" value="${evaluation.tasmi1_5 || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasmi6_10">Tasmi' 6-10</label>
+                        <input type="number" id="tasmi6_10" class="score-input" min="0" max="100" value="${evaluation.tasmi6_10 || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasmi1_10">Tasmi' 1-10</label>
+                        <input type="number" id="tasmi1_10" class="score-input" min="0" max="100" value="${evaluation.tasmi1_10 || ''}">
+                    </div>
+                `;
+            } else if (currentUser.username === 'ppbhasy3') {
+                const evaluation = getStudentEvaluation(student.id) || {};
+                
+                evaluationForm.innerHTML = `
+                    <div class="form-group">
+                        <label for="tasmi11_15">Tasmi' 11-15</label>
+                        <input type="number" id="tasmi11_15" class="score-input" min="0" max="100" value="${evaluation.tasmi11_15 || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasmi16_20">Tasmi' 16-20</label>
+                        <input type="number" id="tasmi16_20" class="score-input" min="0" max="100" value="${evaluation.tasmi16_20 || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasmi11_20">Tasmi' 11-20</label>
+                        <input type="number" id="tasmi11_20" class="score-input" min="0" max="100" value="${evaluation.tasmi11_20 || ''}">
+                    </div>
+                `;
+            } else if (currentUser.username === 'ppbhasy4') {
+                const evaluation = getStudentEvaluation(student.id) || {};
+                
+                evaluationForm.innerHTML = `
+                    <div class="form-group">
+                        <label for="tasmi21_25">Tasmi' 21-25</label>
+                        <input type="number" id="tasmi21_25" class="score-input" min="0" max="100" value="${evaluation.tasmi21_25 || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasmi26_30">Tasmi' 26-30</label>
+                        <input type="number" id="tasmi26_30" class="score-input" min="0" max="100" value="${evaluation.tasmi26_30 || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasmi21_30">Tasmi' 21-30</label>
+                        <input type="number" id="tasmi21_30" class="score-input" min="0" max="100" value="${evaluation.tasmi21_30 || ''}">
+                    </div>
+                `;
+            } else if (currentUser.username === 'ppbhasy5') {
+                const evaluation = getStudentEvaluation(student.id) || {};
+                
+                evaluationForm.innerHTML = `
+                    <div class="form-group">
+                        <label for="perilaku">Perilaku</label>
+                        <select id="perilaku">
+                            <option value="">-- Pilih --</option>
+                            <option value="A" ${evaluation.perilaku === 'A' ? 'selected' : ''}>A</option>
+                            <option value="B" ${evaluation.perilaku === 'B' ? 'selected' : ''}>B</option>
+                            <option value="C" ${evaluation.perilaku === 'C' ? 'selected' : ''}>C</option>
+                            <option value="D" ${evaluation.perilaku === 'D' ? 'selected' : ''}>D</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="akhlaq">Akhlaq</label>
+                        <select id="akhlaq">
+                            <option value="">-- Pilih --</option>
+                            <option value="A" ${evaluation.akhlaq === 'A' ? 'selected' : ''}>A</option>
+                            <option value="B" ${evaluation.akhlaq === 'B' ? 'selected' : ''}>B</option>
+                            <option value="C" ${evaluation.akhlaq === 'C' ? 'selected' : ''}>C</option>
+                            <option value="D" ${evaluation.akhlaq === 'D' ? 'selected' : ''}>D</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ketertiban">Ketertiban</label>
+                        <select id="ketertiban">
+                            <option value="">-- Pilih --</option>
+                            <option value="A" ${evaluation.ketertiban === 'A' ? 'selected' : ''}>A</option>
+                            <option value="B" ${evaluation.ketertiban === 'B' ? 'selected' : ''}>B</option>
+                            <option value="C" ${evaluation.ketertiban === 'C' ? 'selected' : ''}>C</option>
+                            <option value="D" ${evaluation.ketertiban === 'D' ? 'selected' : ''}>D</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="catatan">Catatan</label>
+                        <textarea id="catatan" rows="3" style="width: 100%;">${evaluation.catatan || ''}</textarea>
+                    </div>
+                `;
+            }
+            
+            // Add submit button
+            const submitBtn = document.createElement('button');
+            submitBtn.textContent = 'Kirim';
+            submitBtn.addEventListener('click', () => submitEvaluation(student.id));
+            evaluationForm.appendChild(submitBtn);
+            
+            // Show modal
+            modal.style.display = 'flex';
+            
+            // Close modal event
+            document.querySelector('.close-modal').addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Submit evaluation
+        function submitEvaluation(studentId) {
+            const evaluation = {
+                studentId: studentId,
+                evaluator: currentUser.username,
+                date: new Date().toISOString()
+            };
+            
+            if (currentUser.username === 'ppbhasy1') {
+                evaluation.kelancaran = parseInt(document.getElementById('kelancaran').value) || 0;
+                evaluation.tajwid = parseInt(document.getElementById('tajwid').value) || 0;
+                evaluation.fashohah = parseInt(document.getElementById('fashohah').value) || 0;
+            } else if (currentUser.username === 'ppbhasy2') {
+                evaluation.tasmi1_5 = parseInt(document.getElementById('tasmi1_5').value) || 0;
+                evaluation.tasmi6_10 = parseInt(document.getElementById('tasmi6_10').value) || 0;
+                evaluation.tasmi1_10 = parseInt(document.getElementById('tasmi1_10').value) || 0;
+            } else if (currentUser.username === 'ppbhasy3') {
+                evaluation.tasmi11_15 = parseInt(document.getElementById('tasmi11_15').value) || 0;
+                evaluation.tasmi16_20 = parseInt(document.getElementById('tasmi16_20').value) || 0;
+                evaluation.tasmi11_20 = parseInt(document.getElementById('tasmi11_20').value) || 0;
+            } else if (currentUser.username === 'ppbhasy4') {
+                evaluation.tasmi21_25 = parseInt(document.getElementById('tasmi21_25').value) || 0;
+                evaluation.tasmi26_30 = parseInt(document.getElementById('tasmi26_30').value) || 0;
+                evaluation.tasmi21_30 = parseInt(document.getElementById('tasmi21_30').value) || 0;
+            } else if (currentUser.username === 'ppbhasy5') {
+                evaluation.perilaku = document.getElementById('perilaku').value;
+                evaluation.akhlaq = document.getElementById('akhlaq').value;
+                evaluation.ketertiban = document.getElementById('ketertiban').value;
+                evaluation.catatan = document.getElementById('catatan').value;
+            }
+            
+            // Save evaluation
+            const existingIndex = evaluations.findIndex(e => e.studentId === studentId && e.evaluator === currentUser.username);
+            
+            if (existingIndex !== -1) {
+                evaluations[existingIndex] = evaluation;
+            } else {
+                evaluations.push(evaluation);
+            }
+            
+            // Save to localStorage
+            saveData(DATA_KEYS.EVALUATIONS, evaluations);
+            
+            // Close modal
+            document.getElementById('evaluationModal').style.display = 'none';
+            
+            // Refresh student list
+            populateEvaluationStudents();
+        }
+        
+        // Get student evaluation
+        function getStudentEvaluation(studentId) {
+            return evaluations.find(e => e.studentId === studentId && e.evaluator === currentUser.username);
+        }
+        
+        // Populate group select
+        function populateGroupSelect(selectElement) {
+            // Clear existing options except the first one
+            while (selectElement.options.length > 1) {
+                selectElement.remove(1);
+            }
+            
+            // Add groups
+            groups.forEach(group => {
+                const option = document.createElement('option');
+                option.value = group.id;
+                option.textContent = group.name;
+                selectElement.appendChild(option);
+            });
+        }
+        
+        // Populate group list
+        function populateGroupList() {
+            const tbody = document.getElementById('groupListBody');
+            tbody.innerHTML = '';
+            
+            groups.forEach(group => {
+                const row = document.createElement('tr');
+                
+                // Group name
+                const nameCell = document.createElement('td');
+                nameCell.textContent = group.name;
+                row.appendChild(nameCell);
+                
+                // Action buttons
+                const actionCell = document.createElement('td');
+                actionCell.className = 'action-buttons';
+                
+                // Edit button
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Edit';
+                editBtn.addEventListener('click', () => editGroup(group.id));
+                actionCell.appendChild(editBtn);
+                
+                // Delete button (only for admin)
+                if (currentUser.username === 'ppbhasyadmin') {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = 'Hapus';
+                    deleteBtn.style.backgroundColor = 'var(--accent-color)';
+                    deleteBtn.addEventListener('click', () => deleteGroup(group.id));
+                    actionCell.appendChild(deleteBtn);
+                }
+                
+                row.appendChild(actionCell);
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Edit group
+        function editGroup(groupId) {
+            const group = groups.find(g => g.id === groupId);
+            if (!group) return;
+            
+            const newName = prompt('Edit nama kelompok:', group.name);
+            if (newName && newName.trim() !== '') {
+                group.name = newName.trim();
+                
+                // Save to localStorage
+                saveData(DATA_KEYS.GROUPS, groups);
+                
+                populateGroupList();
+                
+                // Update all group selects
+                const groupSelects = document.querySelectorAll('select');
+                groupSelects.forEach(select => {
+                    if (select.id !== 'loginGroup') {
+                        populateGroupSelect(select);
+                    }
+                });
+            }
+        }
+        
+        // Delete group
+        function deleteGroup(groupId) {
+            if (confirm('Apakah Anda yakin ingin menghapus kelompok ini?')) {
+                // Remove group
+                groups = groups.filter(g => g.id !== groupId);
+                
+                // Remove students in this group
+                students = students.filter(s => s.groupId !== groupId);
+                
+                // Remove evaluations for students in this group
+                evaluations = evaluations.filter(e => {
+                    const student = students.find(s => s.id === e.studentId);
+                    return student && student.groupId !== groupId;
+                });
+                
+                // Save to localStorage
+                saveData(DATA_KEYS.GROUPS, groups);
+                saveData(DATA_KEYS.STUDENTS, students);
+                saveData(DATA_KEYS.EVALUATIONS, evaluations);
+                
+                // Refresh UI
+                populateGroupList();
+                populateStudentList();
+                populateResults();
+                
+                // Update all group selects
+                const groupSelects = document.querySelectorAll('select');
+                groupSelects.forEach(select => {
+                    populateGroupSelect(select);
+                });
+            }
+        }
+        
+        // Add group
+        function addGroup() {
+            const newGroupNameInput = document.getElementById('newGroupName');
+            const newGroupName = newGroupNameInput.value.trim();
+            
+            if (!newGroupName) {
+                alert('Nama kelompok tidak boleh kosong');
+                return;
+            }
+            
+            // Create new group
+            const newGroup = {
+                id: Math.max(...groups.map(g => g.id), 0) + 1,
+                name: newGroupName
+            };
+            
+            groups.push(newGroup);
+            
+            // Save to localStorage
+            saveData(DATA_KEYS.GROUPS, groups);
+            
+            // Clear input
+            newGroupNameInput.value = '';
+            
+            // Refresh UI
+            populateGroupList();
+            
+            // Update all group selects
+            const groupSelects = document.querySelectorAll('select');
+            groupSelects.forEach(select => {
+                populateGroupSelect(select);
+            });
+        }
+        
+        // Populate student list
+        function populateStudentList() {
+            const tbody = document.getElementById('studentListBody');
+            tbody.innerHTML = '';
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                
+                // Student name
+                const nameCell = document.createElement('td');
+                nameCell.textContent = student.name;
+                row.appendChild(nameCell);
+                
+                // Group name
+                const groupCell = document.createElement('td');
+                groupCell.textContent = getGroupName(student.groupId);
+                row.appendChild(groupCell);
+                
+                // Action buttons
+                const actionCell = document.createElement('td');
+                actionCell.className = 'action-buttons';
+                
+                // Delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Hapus';
+                deleteBtn.style.backgroundColor = 'var(--accent-color)';
+                deleteBtn.addEventListener('click', () => deleteStudent(student.id));
+                actionCell.appendChild(deleteBtn);
+                
+                row.appendChild(actionCell);
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Add student
+        function addStudent() {
+            const groupSelect = document.getElementById('studentGroupSelect');
+            const newStudentInput = document.getElementById('newStudentName');
+            
+            const groupId = parseInt(groupSelect.value);
+            const studentName = newStudentInput.value.trim();
+            
+            if (!groupId) {
+                alert('Harap pilih kelompok');
+                return;
+            }
+            
+            if (!studentName) {
+                alert('Nama santri tidak boleh kosong');
+                return;
+            }
+            
+            // Create new student
+            const newStudent = {
+                id: Math.max(...students.map(s => s.id), 0) + 1,
+                name: studentName,
+                groupId: groupId
+            };
+            
+            students.push(newStudent);
+            
+            // Save to localStorage
+            saveData(DATA_KEYS.STUDENTS, students);
+            
+            // Clear input
+            newStudentInput.value = '';
+            
+            // Refresh UI
+            populateStudentList();
+        }
+        
+        // Delete student
+        function deleteStudent(studentId) {
+            if (confirm('Apakah Anda yakin ingin menghapus santri ini?')) {
+                // Remove student
+                students = students.filter(s => s.id !== studentId);
+                
+                // Remove evaluations for this student
+                evaluations = evaluations.filter(e => e.studentId !== studentId);
+                
+                // Save to localStorage
+                saveData(DATA_KEYS.STUDENTS, students);
+                saveData(DATA_KEYS.EVALUATIONS, evaluations);
+                
+                // Refresh UI
+                populateStudentList();
+                populateResults();
+                
+                if (currentUser.role === 'teacher') {
+                    populateEvaluationStudents();
+                }
+            }
+        }
+        
+        // Populate results
+        function populateResults() {
+            const tbody = document.getElementById('resultsBody');
+            tbody.innerHTML = '';
+            
+            const groupFilter = document.getElementById('resultGroupSelect').value;
+            let filteredStudents = students;
+            
+            if (groupFilter) {
+                const groupId = parseInt(groupFilter);
+                filteredStudents = students.filter(s => s.groupId === groupId);
+            }
+            
+            filteredStudents.forEach(student => {
+                const row = document.createElement('tr');
+                
+                // Student name
+                row.innerHTML = `<td>${student.name}</td>`;
+                
+                // Group name
+                row.innerHTML += `<td>${getGroupName(student.groupId)}</td>`;
+                
+                // Get all evaluations for this student
+                const studentEvaluations = evaluations.filter(e => e.studentId === student.id);
+                
+                // Initialize all values to empty
+                const values = {
+                    kelancaran: '', tajwid: '', fashohah: '',
+                    tasmi1_5: '', tasmi6_10: '', tasmi1_10: '',
+                    tasmi11_15: '', tasmi16_20: '', tasmi11_20: '',
+                    tasmi21_25: '', tasmi26_30: '', tasmi21_30: '',
+                    perilaku: '', akhlaq: '', ketertiban: '', catatan: ''
+                };
+                
+                // Fill values from evaluations
+                studentEvaluations.forEach(eval => {
+                    for (const key in values) {
+                        if (eval[key] !== undefined) {
+                            values[key] = eval[key];
+                        }
+                    }
+                });
+                
+                // Add all values to the row
+                for (const key in values) {
+                    row.innerHTML += `<td>${values[key]}</td>`;
+                }
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Download results as CSV
+        function downloadResults() {
+            const groupFilter = document.getElementById('resultGroupSelect').value;
+            let filteredStudents = students;
+            
+            if (groupFilter) {
+                const groupId = parseInt(groupFilter);
+                filteredStudents = students.filter(s => s.groupId === groupId);
+            }
+            
+            // Create CSV content
+            let csvContent = "Nama Santri,Kelompok,Kelancaran,Tajwid,Fashohah,Tasmi 1-5,Tasmi 6-10,Tasmi 1-10,Tasmi 11-15,Tasmi 16-20,Tasmi 11-20,Tasmi 21-25,Tasmi 26-30,Tasmi 21-30,Perilaku,Akhlaq,Ketertiban,Catatan\n";
+            
+            filteredStudents.forEach(student => {
+                // Get all evaluations for this student
+                const studentEvaluations = evaluations.filter(e => e.studentId === student.id);
+                
+                // Initialize all values to empty
+                const values = {
+                    kelancaran: '', tajwid: '', fashohah: '',
+                    tasmi1_5: '', tasmi6_10: '', tasmi1_10: '',
+                    tasmi11_15: '', tasmi16_20: '', tasmi11_20: '',
+                    tasmi21_25: '', tasmi26_30: '', tasmi21_30: '',
+                    perilaku: '', akhlaq: '', ketertiban: '', catatan: ''
+                };
+                
+                // Fill values from evaluations
+                studentEvaluations.forEach(eval => {
+                    for (const key in values) {
+                        if (eval[key] !== undefined) {
+                            values[key] = eval[key];
+                        }
+                    }
+                });
+                
+                // Add row to CSV
+                csvContent += `"${student.name}","${getGroupName(student.groupId)}",${values.kelancaran},${values.tajwid},${values.fashohah},${values.tasmi1_5},${values.tasmi6_10},${values.tasmi1_10},${values.tasmi11_15},${values.tasmi16_20},${values.tasmi11_20},${values.tasmi21_25},${values.tasmi26_30},${values.tasmi21_30},${values.perilaku},${values.akhlaq},${values.ketertiban},"${values.catatan}"\n`;
+            });
+            
+            // Create download link
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", "data:text/csv;charset=utf-8," + encodedUri);
+            link.setAttribute("download", `hasil_penilaian_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Handle logout
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            showLogin();
+        }
+        
+        // Get group name by ID
+        function getGroupName(groupId) {
+            const group = groups.find(g => g.id === groupId);
+            return group ? group.name : 'Tidak diketahui';
+        }
+        
+        // Show notification
+        function showNotification(element, message, type) {
+            element.textContent = message;
+            element.className = `notification ${type}`;
+            element.classList.remove('hidden');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                element.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Initialize the application
+        init();
+    </script>
+</body>
+</html>
+
+  <script>
+    
+  </script>
+</body>
+</html>
