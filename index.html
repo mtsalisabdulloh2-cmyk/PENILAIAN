@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-
-<html>
 <head>
+ 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login</title>
-
+  <title>Login & Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js"></script>
+  
   <style>
     
   </style>
@@ -1407,12 +1409,43 @@
         
         // Initialize the application
         init();
+      
     </script>
 </body>
+
 </html>
 
-  <script>
-    
+<script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlDOVEzPVPhxteki6ofDqY5aEMWY9MT4w",
+      authDomain: "nilai-18ad9.firebaseapp.com",
+      projectId: "nilai-18ad9",
+      storageBucket: "nilai-18ad9.firebasestorage.app",
+      messagingSenderId: "1035992578638",
+      appId: "1:1035992578638:web:33a5cd4b04d4eb0262611f",
+      measurementId: "G-163PG6YBPQ"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const analytics = firebase.analytics();
+    const db = firebase.firestore();
+
+    function addData() {
+      const input = document.getElementById('newData');
+      if(input.value.trim() === "") return;
+      db.collection("data").add({ nama: input.value });
+      input.value = "";
+    }
+
+    const dataList = document.getElementById('dataList');
+    db.collection("data").onSnapshot(snapshot => {
+      dataList.innerHTML = "";
+      snapshot.forEach(doc => {
+        const li = document.createElement('li');
+        li.textContent = doc.data().nama;
+        dataList.appendChild(li);
+      });
+    });
   </script>
 </body>
 </html>
